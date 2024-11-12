@@ -4,7 +4,6 @@ import TeamMember from "../_components/common/TeamMember";
 export default function page() {
   return (
     <div className="mx-auto px-12 py-10 text-center bg-gray-900 text-gray-800">
-      {/* About Section */}
       <section className="bg-gradient-to-r from-blue-700 to-indigo-700 text-white rounded-lg shadow-md p-8 my-10">
         <h2 className="text-4xl font-extrabold mb-6">About</h2>
         <p className="text-lg mb-4">
@@ -23,7 +22,6 @@ export default function page() {
         </p>
       </section>
 
-      {/* Team Section */}
       <div className="flex flex-wrap justify-center gap-16">
         <TeamMember
           name="Darshan Kotian"
