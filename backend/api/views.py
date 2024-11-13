@@ -18,6 +18,7 @@ from django.contrib.auth.models import User
 from rest_framework.permissions import AllowAny , IsAuthenticated
 #To ensure typesafety
 from typing import List , Optional , Dict , Any
+from .permissions import IsOwner
 
 # Create your views here.
 
@@ -48,9 +49,14 @@ class PDFViewSet(viewsets.ModelViewSet):
     CRUD (Create, Read, Update, Delete) endpoints by automatically generating 
     views based on the model and serializer you specify.
     """
-    queryset = PDF.objects.all()
+
     serializer_class =PDFSerializer
     parser_classes = (MultiPartParser, FormParser, JSONParser)
+    permission_classes = [IsAuthenticated, IsOwner]
+
+    def get_queryset(self):
+        # Only show PDFs owned by the authenticated user
+        return PDF.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer) ->None:
         """

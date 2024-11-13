@@ -18,7 +18,7 @@ export default function ChatInterface({ id }: { id: string }) {
   const [history, setHistory] = useState<ChatHistoryItem[]>([]);
   const [suggestions, setSuggestions] =
     useState<string[]>(SUGGESTION_QUESTIONS);
-  const [showSuggestions, setShowSuggestions] = useState(true);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
