@@ -8,7 +8,7 @@
 - **AI-Powered Chat**: Ask questions about the content of the PDF, and the AI will provide answers based on the document's content.
 - **Fast and Responsive**: Built using Next.js and Django Rest Framework to ensure smooth and fast performance.
 - **Carousel**: A visual display on the home page showcasing the core features and instructions for using Study Buddy.
-- **Authentication**: Secure user authentication with Django Rest Framework's JWT tokens (under development).
+- **Authentication**: Secure user authentication with Django Rest Framework's JWT tokens.
 - **Seamless PDF Parsing**: The application extracts text from PDFs and converts them into a format that the AI model can process.
 - **Next.js 15 Features**: Leveraging the latest app router, server actions, and TypeScript for a modern web experience.
 
