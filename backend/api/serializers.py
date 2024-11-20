@@ -1,8 +1,6 @@
 from rest_framework import serializers
-from rest_framework.permissions import IsAuthenticated
 from .models import PDF , Chat
 from django.contrib.auth.models import User
-from .permissions import IsOwner
 
 class PDFSerializer(serializers.ModelSerializer):
     """
@@ -13,11 +11,7 @@ class PDFSerializer(serializers.ModelSerializer):
         model = PDF
         #Fields to include in JSON
         fields = ["id", "user", "file", "text", "created_at"]
-        permission_classes = [IsAuthenticated, IsOwner]
-    def get_queryset(self):
-        # Only show PDFs owned by the authenticated user
-        return PDF.objects.filter(user=self.request.user)
-
+    
     def to_internal_value(self, data):
 
         if 'user' in data:
@@ -33,7 +27,6 @@ class ChatSerializer(serializers.ModelSerializer):
     class Meta:
         model = Chat
         fields = ["id", "pdf", "question" , "response" , "created_at"]
-        permission_classes = [IsOwner]
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=True)

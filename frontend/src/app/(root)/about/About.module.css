@@ -1,0 +1,40 @@
+@keyframes bg-scroll {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes particle-motion {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-50px) translateX(50px) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100px) translateX(100px) scale(0.8);
+  }
+}
+
+.animate-bg-scroll {
+  background-size: 300% 300%;
+  animation: bg-scroll 10s ease infinite;
+}
+
+.particle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  animation: particle-motion 5s infinite ease-in-out;
+}
