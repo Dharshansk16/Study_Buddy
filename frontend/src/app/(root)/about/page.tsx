@@ -26,22 +26,22 @@ export default function page() {
         <TeamMember
           name="Darshan Kotian"
           role="Project Lead & Backend Developer"
-          imageSrc="https://via.placeholder.com/100"
+          imageSrc="/about/darshanpfp.png"
         />
         <TeamMember
           name="Ronith J Salian"
           role="Frontend Developer"
-          imageSrc="https://via.placeholder.com/100"
+          imageSrc="/about/ronithpfp.jpg"
         />
         <TeamMember
           name="Himanshu"
           role="Frontend Developer"
-          imageSrc="https://via.placeholder.com/100"
+          imageSrc="/about/himanshupfp.jpg"
         />
         <TeamMember
           name="Rashmitha R Nayak"
           role="Frontend Developer"
-          imageSrc="https://via.placeholder.com/100"
+          imageSrc="/about/rashmithapfp.jpg"
         />
       </div>
     </div>
