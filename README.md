@@ -43,7 +43,7 @@ Follow these steps to get the project up and running locally.
 
    ```bash
    git clone https://github.com/Dharshansk16/Study_Buddy.git
-   cd study-buddy/backend
+   cd Study_Buddy/backend
 2. Set up a virtual environment:
    ```bash
    python -m venv venv
@@ -73,7 +73,7 @@ source venv/bin/activate  # On Windows use `venv\Scripts\activate`
    npm install
 3. Configure the .env.local file
    ```bash
-   NEXT_PUBLIC_API_URL="http://127.0.0.1:8000/api/"
+   NEXT_PUBLIC_API_URL="http://127.0.0.1:8000/api"
      
 4. Start the frontend server:
    ```bash
