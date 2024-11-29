@@ -3,8 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { fetchWithAuth } from "@/lib/api";
 import { LoadingDots } from "@/components/loading_indicators/Loading";
 import { SUGGESTION_QUESTIONS } from "@/app/constants/Constant";
-import { IoIosArrowUp } from "react-icons/io";
-import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { formatAnswer, highlightCode } from "@/lib/formatResponse";
 
 interface ChatHistoryItem {
@@ -19,6 +18,7 @@ export default function ChatInterface({ id }: { id: string }) {
   const [suggestions, setSuggestions] =
     useState<string[]>(SUGGESTION_QUESTIONS);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -46,7 +46,6 @@ export default function ChatInterface({ id }: { id: string }) {
   }, [id]);
 
   useEffect(() => {
-    // Scroll to the bottom when the history is updated
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop =
         chatContainerRef.current.scrollHeight;
@@ -67,7 +66,10 @@ export default function ChatInterface({ id }: { id: string }) {
       });
       if (!res.ok) {
         console.log("Error occurred while submitting the question");
+        setIsLoading(false);
+        return;
       }
+
       const data = await res.json();
       const formattedAnswer = formatAnswer(data.response);
       const highlightedAnswer = highlightCode(formattedAnswer);
@@ -104,8 +106,47 @@ export default function ChatInterface({ id }: { id: string }) {
     setShowSuggestions((prev) => !prev);
   };
 
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prev) => !prev);
+  };
+
+  const scrollToQuestion = (index: number) => {
+    const questionElement = document.getElementById(`question-${index}`);
+    if (questionElement && chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = questionElement.offsetTop;
+    }
+  };
+
   return (
-    <div className="flex flex-col h-full rounded-2xl">
+    <div className="flex flex-col h-full rounded-2xl relative">
+      <div className="flex items-center justify-between px-4 pb-4  bg-zinc-800 rounded-t-xl">
+        <button
+          onClick={toggleDropdown}
+          className="text-white"
+          aria-label={isDropdownOpen ? "Hide questions" : "Show questions"}
+        >
+          {isDropdownOpen ? <IoIosArrowDown /> : <IoIosArrowUp />}
+        </button>
+        <h3 className="text-white text-xl">Chat History</h3>
+      </div>
+
+      {isDropdownOpen && (
+        <div className="bg-zinc-700 text-white p-2 rounded-xl z-50 absolute top-10 left-0 right-0 w-[400px] max-h-64 overflow-y-auto shadow-lg">
+          <ul>
+            {history.map((item, index) => (
+              <li key={index}>
+                <button
+                  onClick={() => scrollToQuestion(index)}
+                  className="w-full text-left p-2 rounded-lg hover:bg-gray-700 transition-colors"
+                >
+                  {item.question}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       <div
         className="flex-1 overflow-y-auto space-y-4 p-4 bg-zinc-800 rounded-lg"
         ref={chatContainerRef}
@@ -114,7 +155,7 @@ export default function ChatInterface({ id }: { id: string }) {
           <p className="text-gray-400">No questions asked yet.</p>
         ) : (
           history.map((item, index) => (
-            <div key={index}>
+            <div key={index} id={`question-${index}`}>
               <div className="p-3 rounded-lg bg-blue-500 text-white self-end mb-2">
                 {item.question}
               </div>
@@ -136,13 +177,12 @@ export default function ChatInterface({ id }: { id: string }) {
 
       {showSuggestions && (
         <div className="my-2">
-          <h3 className="text-white p-2"></h3>
           <div className="space-y-2">
             {suggestions.map((suggestion, index) => (
               <button
                 key={index}
                 onClick={() => handleSuggestionClick(suggestion)}
-                className="w-full text-left p-2 rounded-lg bg-gray-700 text-white hover:bg-gray-600"
+                className="w-full text-left p-2 rounded-lg bg-gray-700 text-white hover:bg-gray-600 transition-colors"
               >
                 {suggestion}
               </button>
