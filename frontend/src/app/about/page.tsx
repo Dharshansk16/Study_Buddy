@@ -1,5 +1,5 @@
 import React from "react";
-import TeamMember from "../_components/common/TeamMember";
+import TeamMember from "../(root)/_components/common/TeamMember";
 import styles from "./About.module.css";
 
 export default function Page() {
