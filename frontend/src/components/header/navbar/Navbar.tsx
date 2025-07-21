@@ -82,23 +82,21 @@ export default function Navbar() {
           </div>
         </div>
         <div className="navbar-center">
-          <Link href="/">
-            <div className={styles.logoContainer}>
-              <span
-                className={`${styles.textBuddy} font-bold text-[16px] md:text-2xl text-blue-100`}
-              >
-                Study
-              </span>
+          <div className={styles.logoContainer}>
+            <span
+              className={`${styles.textBuddy} font-bold text-[16px] md:text-2xl text-blue-100`}
+            >
+              Study
+            </span>
 
-              <img className={styles.logo} src="/logo.svg" alt="logo" />
+            <img className={styles.logo} src="/logo.svg" alt="logo" />
 
-              <span
-                className={` ${styles.textBuddy} font-bold text-[16px] md:text-2xl text-blue-100`}
-              >
-                Buddy
-              </span>
-            </div>
-          </Link>
+            <span
+              className={` ${styles.textBuddy} font-bold text-[16px] md:text-2xl text-blue-100`}
+            >
+              Buddy
+            </span>
+          </div>
         </div>
         <div className="navbar-end">
           <NavButton />

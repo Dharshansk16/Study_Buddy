@@ -148,7 +148,7 @@ export default function ChatInterface({ id }: { id: string }) {
       )}
 
       <div
-        className="flex-1 overflow-y-auto space-y-4 p-4 bg-zinc-800 rounded-lg"
+        className="flex-1 overflow-y-auto space-y-4 p-1 bg-zinc-800 rounded-lg"
         ref={chatContainerRef}
       >
         {history.length === 0 ? (
